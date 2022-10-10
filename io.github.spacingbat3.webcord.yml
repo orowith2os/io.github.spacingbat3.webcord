@@ -24,11 +24,23 @@ modules:
         url: https://github.com/SpacingBat3/WebCord/releases/download/v3.8.7/WebCord-3.8.7-x64.AppImage
         sha256: 336c90893367ae3074ad08543aff298d7baf0a1bbfc833c5b69b0e89fb22229a
         only-arches: [x86_64]
+        x-checker-data: #Taken from the Inochi Creator Flatpak
+          type: json
+          url: https://api.github.com/repos/SpacingBat3/Webcord/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .assets[] | select(.name=="WebCord-$version-x64.AppImage")
+            | .browser_download_url
 
       - type: file
         url: https://github.com/SpacingBat3/WebCord/releases/download/v3.8.7/WebCord-3.8.7-arm64.AppImage
         sha256: a4b70cb45caed6e87d5434e2d3b9e03c11346d7e9a5eb3c954f964ca6908b45b
         only-arches: [aarch64]
+        x-checker-data: #Taken from the Inochi Creator Flatpak
+          type: json
+          url: https://api.github.com/repos/SpacingBat3/Webcord/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .assets[] | select(.name=="WebCord-$version-arm64.AppImage")
+            | .browser_download_url
       
       - type: file
         dest-filename: run.sh
